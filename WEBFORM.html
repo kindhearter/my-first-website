@@ -3,29 +3,21 @@
 
 <head>
   <title>Web-to-Case Form</title>
-  <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script>
-    
-
-    function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] 		= JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500);  
-  </script>
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+ function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+</script>
 </head>
 
 <body>
-<form action="https://nateraorg--dev.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D780000008hxQ" method="POST">
+<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D2w00000HHVpM" method="POST">
 
-<input type=hidden name='captcha_settings' value='{"keyname":"TEST_KEY","fallback":"true","orgId":"00D780000008hxQ","ts":""}'>
-<input type=hidden name="orgid" value="00D780000008hxQ">
+<input type=hidden name='captcha_settings' value='{"keyname":"TEST","fallback":"true","orgId":"00D2w00000HHVpM","ts":""}'>
+<input type=hidden name="orgid" value="00D2w00000HHVpM">
 <input type=hidden name="retURL" value="http://">
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-<!--  these lines if you wish to test in debug mode.                          -->
-<!--  <input type="hidden" name="debug" value=1>                              -->
-<!--  <input type="hidden" name="debugEmail" value="skandasamy@natera.com">   -->
-<!--  ----------------------------------------------------------------------  -->
-
-<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
+<label for="name">Contact Nameeeeeeeee</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
 
 <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
 
