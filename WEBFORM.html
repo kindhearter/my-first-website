@@ -92,14 +92,12 @@
     }
 	
     function timestamp() {
-	console.log("======================")
       var response = document.getElementById("g-recaptcha-response");
       if (response == null || response.value.trim() == "") {
         var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
         elems["ts"] = JSON.stringify(new Date().getTime());
         document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
       }
-	  console.log("========2==============")
     }
     setInterval(timestamp, 500);
   </script>
@@ -172,7 +170,7 @@
       type="checkbox" value="1" required="" onclick="handleSubmitButton()"><br>
 
     <input id="Date_of_Birth__c" maxlength="80" name="Date_of_Birth__c" size="20" type="hidden">
-    <input type="hidden" name="recordType" id="recordType" value="0127d000001e3v3">
+    <input type="hidden" name="recordType" id="recordType" value="01278000000LBHAAA4">
     <input type="hidden" id="status" name="status" value="New"><br>
 
     <div class="g-recaptcha" data-sitekey="6LfP1r0rAAAAAAc3vGv6lw1kFQfSTLfqsXgOZ4GY"></div>
