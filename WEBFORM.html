@@ -5,180 +5,43 @@
   <title>Web-to-Case Form</title>
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script>
-    window.onload = function () {
-      var firstNameField = document.getElementById('patient_firstname__c');
-      var lastNameField = document.getElementById('patient_lastname__c');
-      var partnerFirstNameField = document.getElementById('Partner_First_Name__c');
-      var partnerLastNameField = document.getElementById('Partner_Last_Name__c');
-      var phoneField = document.getElementById('patient_phonenumber__c');
+    
 
-      document.getElementById('dateValue').max = new Date().toISOString().split("T")[0]; // Restrict future dates.
-      handleSubmitButton();// Disable submit button on page load
-
-
-      var phoneRegex = /^\+?[0-9-]{0,17}$/; // Allows only +,-,numbers
-
-      nameValidation(firstNameField);
-      nameValidation(lastNameField);
-      nameValidation(partnerFirstNameField);
-      nameValidation(partnerLastNameField);
-
-      phoneField.addEventListener('input', function () {
-        if (!phoneRegex.test(phoneField.value)) {
-          phoneField.value = phoneField.value.replace(/[^\d+-]/g, '').slice(0, 18);
-        }
-      });
-    };
-
-
-    //Name validation function
-    function nameValidation(field) {
-      var nameRegex = /^[a-zA-Z\s]*$/; // Allows only letters and spaces
-      field.addEventListener('input', function () {
-        if (!nameRegex.test(field.value)) {
-          field.value = field.value.replace(/[^a-zA-Z\s]/g, '');
-        }
-      });
-    }
-
-    //Disable submit button based on checkbox click
-    function handleSubmitButton() {
-      var patientOrPartnerPregnentField = document.getElementById('Patient_Receives_SMS__c');
-      var iAggreeToContinueField = document.getElementById('I_agree_to_continue_in_the_pre_screening__c');
-      
-      var submitBtn = document.getElementById('submitBtn');
-      var bothChecked = patientOrPartnerPregnentField.checked && iAggreeToContinueField.checked;
-
-      submitBtn.disabled = !bothChecked;
-    }
-
-
-    // format Date value.
-    function handleDateField(event) {
-
-      let dateValue = new Date(event.target.value);
-      let hiddenInput = document.getElementById('Date_of_Birth__c');
-        
-      try{
-        let isoDate = dateValue.toISOString().split('T')[0];
-        let [year, month, day] = isoDate.split('-');
-        let formattedDate = `${month}/${day}/${year}`;
-        hiddenInput.value = formattedDate;
-      }catch(error){
-        hiddenInput.value = null;
-      }
-
-    }
-
-    function validateForm() {
-      var email = document.getElementById('patient_email__c');
-      var emailValue = email ? email.value : '';
-
-      var emailRegex = /\S+@\S+\.\S+/; // Validates email format
-
-      if (!emailRegex.test(emailValue)){
-        alert('Please enter a valid email address.');
-        return false;
-      }
-
-
-      var response = document.getElementById("g-recaptcha-response");
-
-      if (response && response.value.length === 0) {
-        alert("Please verify that you are human!");
-        return false;
-      }
-      return true;
-    }
-
-    function timestamp() {
-      var response = document.getElementById("g-recaptcha-response");
-      if (response == null || response.value.trim() == "") {
-        var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
-        elems["ts"] = JSON.stringify(new Date().getTime());
-        document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
-      }
-    } setInterval(timestamp, 500); 
+    function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] 		= JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500);  
   </script>
 </head>
 
 <body>
-  <form
-    action="https://nateraorg--preprod.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&amp;orgId=00D7d0000079f37"
-    method="POST" onsubmit="return validateForm()">
+<form action="https://nateraorg--dev.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D780000008hxQ" method="POST">
 
-    <input type="hidden" name="orgid" value="00D7d0000079f37">
-    <input type="hidden" name="retURL" value="https://www.natera.com/info/expand-study/expand-study-thank-you/">
+<input type=hidden name='captcha_settings' value='{"keyname":"TEST_KEY","fallback":"true","orgId":"00D780000008hxQ","ts":""}'>
+<input type=hidden name="orgid" value="00D780000008hxQ">
+<input type=hidden name="retURL" value="http://">
 
-    <label for="name" class="required">Patient First Name*:</label>
-    <input id="patient_firstname__c" maxlength="255" name="patient_firstname__c" size="20" type="text" required=""><br>
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail" value="skandasamy@natera.com">   -->
+<!--  ----------------------------------------------------------------------  -->
 
-    <label for="name" class="required">Patient Last Name*:</label>
-    <input id="patient_lastname__c" maxlength="255" name="patient_lastname__c" size="20" type="text" required=""><br>
+<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
 
-    <label for="name" class="required">Patient Phone Number*:</label>
-    <input id="patient_phonenumber__c" maxlength="40" name="patient_phonenumber__c" size="20" type="text"
-      required=""><br>
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
 
-    <label for="name" class="required">Patient Email*:</label>
-    <input id="patient_email__c" maxlength="80" name="patient_email__c" size="20" type="text" required=""><br>
+<label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
 
+<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
 
-    <!-- Newly Added fields Start-->
-    <label for="name">Date of Birth:</label>
-    <input id="dateValue" name="dateValue" size="20" type="date" onchange="handleDateField(event)"><br>
+<label for="description">Description</label><textarea name="description"></textarea><br>
 
-    <label for="name">Partner First Name:</label>
-    <input id="Partner_First_Name__c" maxlength="255" name="Partner_First_Name__c" size="20" type="text"><br>
+<input type="hidden"  id="external" name="external" value="1" /><br>
 
+<div class="g-recaptcha" data-sitekey="6LfP1r0rAAAAAAc3vGv6lw1kFQfSTLfqsXgOZ4GY"></div><br>
+<input type="submit" name="submit">
 
-    <label for="name">Partner Last Name:</label>
-    <input id="Partner_Last_Name__c" maxlength="255" name="Partner_Last_Name__c" size="20" type="text"><br>
+</form>
 
-    <label for="name" class="required">Is Patient or Partner Pregnant*:</label>
-    <input id="Patient_Receives_SMS__c" name="Patient_Receives_SMS__c" type="checkbox" value="1" required=""
-      onclick="handleSubmitButton()"><br>
-    <!-- Newly Added fields End-->
-
-    <p class="title">Please read the agreement below.</p>
-
-    <p>
-      If you would like to continue with the pre-screening process, you will need to agree to the following:
-    </p>
-
-
-    <ul>
-      <li>Provide your personal and contact information, inclusive of personal health information, to Natera for
-        purposes of allowing Natera to contact you to confirm eligibility and provide more information on the study.
-      </li>
-      <li>Allow Natera to confirm your identity.</li>
-      <li>Allow Natera to store your personal and contact information provided during the pre screening for a minimum of
-        6 years. After that time your information will be destroyed.</li>
-      <li>Your participation in this pre-screen process is voluntary. Natera will not condition any treatment, payment
-        for services or eligibility for any services, current or future, on whether you participate in the pre-screen
-        process or the study.</li>
-      <li>You have a right to obtain a copy of your authorization.</li>
-      <li>You can change your mind and stop at any time during this pre-screening process. If you change your mind
-        contact 1-650-769-7787 or inform Natera’s Site Team at the time they contact you.</li>
-      <li>By clicking the agreement button below, I understand and agree to continue in the pre-screening process and
-        authorize the use of my personal information as stated above.</li>
-    </ul>
-
-    <label for="name" class="required">I agree to continue in the pre-screening*:</label>
-    <input id="I_agree_to_continue_in_the_pre_screening__c" name="I_agree_to_continue_in_the_pre_screening__c"
-      type="checkbox" value="1" required="" onclick="handleSubmitButton()"><br>
-
-    <input id="Date_of_Birth__c" maxlength="80" name="Date_of_Birth__c" size="20" type="hidden">
-    <input type="hidden" name="recordType" id="recordType" value="0127d000001e3v3">
-    <input type="hidden" id="status" name="status" value="New"><br>
-
-    <div class="g-recaptcha" data-sitekey="6LdXPS4pAAAAAKia-FIc93HkVaOSn1Ft2RCqTs9Z"></div>
-    <br>
-
-
-    <input type="submit" name="submit" id="submitBtn" class="sf-button">
-
-  </form>
-</body>
+  </body>
 
 </html>
