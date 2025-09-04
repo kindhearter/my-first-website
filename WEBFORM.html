@@ -92,18 +92,20 @@
     }
 	
     function timestamp() {
+	console.log("======================)
       var response = document.getElementById("g-recaptcha-response");
       if (response == null || response.value.trim() == "") {
         var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
         elems["ts"] = JSON.stringify(new Date().getTime());
         document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
       }
+	  console.log("========2==============)
     }
     setInterval(timestamp, 500);
   </script>
 </head>
 <body>
-  <form action="https://nateraorg--dev.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D780000008hxQ" method="POST">
+  <form action="https://nateraorg--dev.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D780000008hxQ" method="POST" onsubmit="return validateForm()">
 
     <input type="hidden" name="captcha_settings"
       value='{"keyname":"TEST","fallback":"true","orgId":"00D780000008hxQ","ts":""}' />
