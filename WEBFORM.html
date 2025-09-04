@@ -95,7 +95,6 @@ function timestamp() { var response = document.getElementById("g-recaptcha-respo
 </head>
 <body>
   <form action="https://nateraorg--preprod.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D7d0000079f37" method="POST" onsubmit="return validateForm()">
-<input type="hidden" name="recordType" id="recordType" value="0127d000001e3v3AAA">
 <input type=hidden name='captcha_settings' value='{"keyname":"TEST_KEY","fallback":"true","orgId":"00D7d0000079f37","ts":""}'>
 
 <input type="hidden" name="debug" value=1> 
@@ -166,6 +165,7 @@ function timestamp() { var response = document.getElementById("g-recaptcha-respo
     
     <input type="hidden" id="status" name="status" value="New"><br>
 
+<input type="hidden" name="recordType" id="recordType" value="0127d000001e3v3">
     <br>
 <div class="g-recaptcha" data-sitekey="6LfP1r0rAAAAAAc3vGv6lw1kFQfSTLfqsXgOZ4GY"></div><br>
 
