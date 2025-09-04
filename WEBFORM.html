@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,12 +91,18 @@
       }
       return true;
     }
+function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
   </script>
 </head>
 <body>
-  <form action="https://nateraorg--dev.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D780000008hxQ" method="POST" onsubmit="return validateForm()">
+  <form action="https://nateraorg--preprod.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D7d0000079f37" method="POST" onsubmit="return validateForm()">
 
-    <input type="hidden" name="orgid" value="00D780000008hxQ" />
+<input type=hidden name='captcha_settings' value='{"keyname":"PRODReCaptca","fallback":"true","orgId":"00D7d0000079f37","ts":""}'>
+
+<input type="hidden" name="debug" value=1> 
+<input type="hidden" name="debugEmail" value="nateratest2025@gmail.com">
+
+    <input type="hidden" name="orgid" value="00D7d0000079f37" />
     <input type="hidden" name="retURL" value="https://www.natera.com/info/expand-study/expand-study-thank-you/" />
 
     <label for="name" class="required">Patient First Name*:</label>
@@ -157,10 +164,11 @@
       type="checkbox" value="1" required="" onclick="handleSubmitButton()"><br>
 
     <input id="Date_of_Birth__c" maxlength="80" name="Date_of_Birth__c" size="20" type="hidden">
-    <input type="hidden" name="recordType" id="recordType" value="01278000000LBHAAA4">
+    <input type="hidden" name="recordType" id="recordType" value="0127d000001e3v3AAA">
     <input type="hidden" id="status" name="status" value="New"><br>
 
     <br>
+<div class="g-recaptcha" data-sitekey="6LdXPS4pAAAAAKia-FIc93HkVaOSn1Ft2RCqTs9Z"></div><br>
 
 
     <input type="submit" name="submit" id="submitBtn" class="sf-button">
